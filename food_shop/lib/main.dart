@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'screen/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +13,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      getPages: [
+        GetPage(name: '/page-one', page: () => const PageOne()),
+        // GetPage(
+        //     name: '/page-four/:data',
+        //     page: () => const PageFour()) // Dynamic route
+      ],
     );
   }
 }
@@ -41,6 +51,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    // AppBar(
+    //   title: Text(
+    //     'jj',
+    //     style: TextStyle(color: Colors.black),
+    //   ),
+    // );
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -52,17 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Align(
             alignment: Alignment.center,
             child: InkWell(
-              // onTap: () => ,
+              onTap: () => Get.off(PageOne()),
               child: Image.asset(
                 "assets/logo.png",
               ),
             )), /* add child content here */
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
